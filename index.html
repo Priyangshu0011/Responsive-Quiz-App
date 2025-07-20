@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Quiz App</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="quiz-container">
+        <header>
+            <h1>Knowledge Challenge</h1>
+            <p class="subtitle">Test your web development knowledge!</p>
+        </header>
+
+        <div class="quiz-area">
+            <div class="stats-bar">
+                <span class="question-counter">Question: <span id="current-question">1</span>/<span id="total-questions">10</span></span>
+                <span class="score-display">Score: <span id="score">0</span></span>
+            </div>
+
+            <div class="question-container">
+                <h2 id="question-text">Loading questions...</h2>
+                <div id="options-container" class="options-container">
+                    <!-- Options will be inserted here by JavaScript -->
+                </div>
+            </div>
+
+            <div class="navigation-buttons">
+                <button id="prev-btn" class="nav-btn" disabled>Previous</button>
+                <button id="next-btn" class="nav-btn">Next</button>
+                <button id="submit-btn" class="nav-btn hidden">Submit Quiz</button>
+                <button id="review-try-again-btn" class="nav-btn hidden">Try Again</button>
+            </div>
+
+            <div id="result-modal" class="modal">
+                <div class="modal-content">
+                    <h2>Quiz Completed!</h2>
+                    <p id="final-score">You scored 0 out of 10</p>
+                    <p id="performance-comment">Keep practicing to improve!</p>
+                    <div class="modal-actions">
+                        <button id="modal-try-again-btn" class="action-btn">Try Again</button>
+                        <button id="review-btn" class="action-btn">Review Answers</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
