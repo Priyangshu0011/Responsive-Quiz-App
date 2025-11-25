@@ -1,0 +1,403 @@
+/* ------------------------------------
+   Root Variables (for easy customization)
+------------------------------------ */
+:root {
+    --primary-color: royalblue;
+    --secondary-color: aliceblue;
+    --correct-color: limegreen;
+    --incorrect-color: crimson;
+    --text-color: darkslategray;
+    --light-text: dimgray;
+    --border-radius: 8px;
+    --box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* Resetting default browser styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* ------------------------------------
+   Body Styling and Background Setup
+------------------------------------ */
+body {
+    font-family: 'Poppins', sans-serif;
+    background: url("wallpaper.jpg") no-repeat center center fixed;
+    background-size: cover;
+    color: var(--text-color);
+    line-height: 1.6;
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    position: relative;
+}
+
+/* Adds a soft white overlay for better text readability */
+body::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.5); 
+    z-index: -1;
+}
+
+/* ------------------------------------
+   Quiz Container Setup
+------------------------------------ */
+.quiz-container {
+    background: white;
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+    width: 100%;
+    max-width: 600px;
+    overflow: hidden;
+    position: relative;
+    z-index: 1;
+}
+
+/* ------------------------------------
+   Header Section (Title + Timer)
+------------------------------------ */
+header {
+    background: var(--primary-color);
+    color: white;
+    padding: 20px;
+    text-align: center;
+}
+
+/* Timer box inside the header */
+.timer {
+    background: rgba(255, 255, 255, 0.8);
+    color: #fff;
+    font-weight: bold;
+    font-size: 1.1rem;
+    margin-top: 8px;
+    padding: 5px 10px;
+    border-radius: 6px;
+    display: inline-block;
+}
+
+/* Overrides timer styling for better visibility on header */
+header .timer {
+    background: rgba(0, 0, 0, 0.3);
+    color: white;
+}
+
+header h1 {
+    font-size: 2rem;
+    margin-bottom: 5px;
+}
+
+.subtitle {
+    font-size: 0.9rem;
+    opacity: 0.9;
+}
+
+/* ------------------------------------
+   Quiz Area and Question Display
+------------------------------------ */
+.quiz-area {
+    padding: 25px;
+}
+
+/* Displays question number and score */
+.stats-bar {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    font-weight: 500;
+    color: var(--light-text);
+}
+
+/* Question and Options section */
+.question-container {
+    margin-bottom: 30px;
+}
+
+.question-container h2 {
+    font-size: 1.3rem;
+    margin-bottom: 20px;
+    color: var(--text-color);
+}
+
+/* Layout for answer options */
+.options-container {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+/* Base styling for answer buttons */
+.option-btn {
+    background: var(--secondary-color);
+    border: 2px solid gainsboro;
+    border-radius: var(--border-radius);
+    padding: 12px 15px;
+    cursor: pointer;
+    text-align: left;
+    transition: all 0.3s ease;
+    font-size: 1rem;
+}
+
+/* Hover effect for better interactivity */
+.option-btn:hover {
+    background: lightsteelblue;
+    border-color: var(--primary-color);
+}
+
+/* State styling for selected and feedback colors */
+.option-btn.selected {
+    background: var(--primary-color);
+    color: white;
+    border-color: var(--primary-color);
+}
+
+.option-btn.correct {
+    background: var(--correct-color);
+    color: white;
+    border-color: var(--correct-color);
+}
+
+.option-btn.incorrect {
+    background: var(--incorrect-color);
+    color: white;
+    border-color: var(--incorrect-color);
+}
+
+/* ------------------------------------
+   Navigation Buttons (Next, Prev, Submit)
+------------------------------------ */
+.navigation-buttons {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+}
+
+.nav-btn {
+    padding: 10px 20px;
+    border: none;
+    border-radius: var(--border-radius);
+    background: var(--primary-color);
+    color: white;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background 0.3s;
+    flex: 1;
+}
+
+.nav-btn:hover {
+    background: cornflowerblue;
+}
+
+/* Disabled button style */
+.nav-btn:disabled {
+    background: silver;
+    cursor: not-allowed;
+}
+
+.hidden {
+    display: none;
+}
+
+/* ------------------------------------
+   Result Modal (Final Score Display)
+------------------------------------ */
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 100;
+    transition: opacity 0.3s ease;
+    opacity: 0;
+    pointer-events: none;
+}
+
+/* Active modal visibility */
+.modal.active {
+    display: flex;
+    opacity: 1;
+    pointer-events: all;
+}
+
+/* Modal content styling */
+.modal-content {
+    background: white;
+    padding: 30px;
+    border-radius: var(--border-radius);
+    text-align: center;
+    max-width: 400px;
+    width: 90%;
+    box-shadow: var(--box-shadow);
+}
+
+.modal-content h2 {
+    margin-bottom: 15px;
+    color: var(--primary-color);
+}
+
+#final-score {
+    font-size: 1.2rem;
+    margin-bottom: 10px;
+    font-weight: 500;
+}
+
+#performance-comment {
+    margin-bottom: 20px;
+    color: var(--light-text);
+}
+
+/* Buttons inside modal */
+.modal-actions {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.action-btn {
+    padding: 10px 25px;
+    background: var(--primary-color);
+    color: white;
+    border: none;
+    border-radius: var(--border-radius);
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background 0.3s;
+    min-width: 120px;
+}
+
+.action-btn:hover {
+    background: cornflowerblue;
+}
+
+/* ------------------------------------
+   Responsive Design for Small Screens
+------------------------------------ */
+@media (max-width: 480px) {
+    body {
+        padding: 10px;
+    }
+
+    .quiz-container {
+        border-radius: 0;
+    }
+
+    header h1 {
+        font-size: 1.5rem;
+    }
+
+    .question-container h2 {
+        font-size: 1.1rem;
+    }
+
+    .option-btn {
+        padding: 10px 12px;
+    }
+
+    .modal-actions {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .action-btn {
+        width: 100%;
+    }
+}
+
+/* ------------------------------------
+   Start Screen Styling
+------------------------------------ */
+.start-screen {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: white;
+    border-radius: var(--border-radius);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    z-index: 10;
+    animation: riseUp 1s ease forwards;
+}
+
+.start-screen h2 {
+    font-size: 1.8rem;
+    color: var(--primary-color);
+    margin-bottom: 10px;
+}
+
+.start-screen p {
+    font-size: 1rem;
+    color: var(--light-text);
+    margin-bottom: 20px;
+}
+
+/* ------------------------------------
+   Entry Animations for Smooth UI Feel
+------------------------------------ */
+
+/* Initial load animation */
+.quiz-container {
+    transform: translateY(50px);
+    opacity: 0;
+    animation: riseUpInitial 1s ease forwards;
+}
+
+@keyframes riseUpInitial {
+    from {
+        transform: translateY(50px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+/* Animation triggered after Start is pressed */
+.quiz-rise-again {
+    animation: riseUpAgain 0.8s ease forwards;
+}
+
+@keyframes riseUpAgain {
+    0% {
+        transform: translateY(20px);
+        opacity: 0.8;
+    }
+    100% {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+/* Fade-in for start screen */
+.start-screen {
+    opacity: 0;
+    animation: fadeIn 1.2s ease 1s forwards; 
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
